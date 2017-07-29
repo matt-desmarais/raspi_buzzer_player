@@ -41,7 +41,11 @@ import RPi.GPIO as GPIO
 import time
 
 buzzer_pin = 27
-
+buzzer_pin2 = 0 
+buzzer_pin3 = 0
+buzzer_pin4 = 0
+buzzer_pin5 = 0
+buzzer_pin6 = 0
 notes = {
 	'B0' : 31,
 	'C1' : 33, 'CS1' : 35,
@@ -572,7 +576,7 @@ final_countdown_tempo = [
 	1,
 ]
 
-def buzz(frequency, length):	 #create the function "buzz" and feed it the pitch and duration)
+def buzz(frequency, length, pin):	 #create the function "buzz" and feed it the pitch and duration)
 
 	if(frequency==0):
 		time.sleep(length)
@@ -582,9 +586,9 @@ def buzz(frequency, length):	 #create the function "buzz" and feed it the pitch 
 	numCycles = int(length * frequency)	 #the number of waves to produce is the duration times the frequency
 	
 	for i in range(numCycles):		#start a loop from 0 to the variable "cycles" calculated above
-		GPIO.output(buzzer_pin, True)	 #set pin 27 to high
+		GPIO.output(pin, True)	 #set pin 27 to high
 		time.sleep(delayValue)		#wait with pin 27 high
-		GPIO.output(buzzer_pin, False)		#set pin 27 to low
+		GPIO.output(pin, False)		#set pin 27 to low
 		time.sleep(delayValue)		#wait with pin 27 low
 	
 
@@ -592,7 +596,14 @@ def buzz(frequency, length):	 #create the function "buzz" and feed it the pitch 
 def setup():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(buzzer_pin, GPIO.IN)
-	GPIO.setup(buzzer_pin, GPIO.OUT)
+	GPIO.setup(buzzer_pin2, GPIO.OUT)
+	GPIO.setup(buzzer_pin3, GPIO.IN)
+	GPIO.setup(buzzer_pin4, GPIO.OUT)
+	GPIO.setup(buzzer_pin5, GPIO.IN)
+	GPIO.setup(buzzer_pin6, GPIO.OUT)
+	
+	
+	
 	
 def destroy():
 	GPIO.cleanup()				# Release resource
